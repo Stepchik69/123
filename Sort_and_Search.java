@@ -1,6 +1,7 @@
-//Сортировка выбором
-
-public class Test {
+Алгоритмы сортировки
+1. Сортировка выбором (Selection Sort)
+java
+public class SelectionSort {
     public static void selectionSort(int[] arr) {
         // Проходим по всем элементам массива
         for (int i = 0; i < arr.length; i++) {
@@ -18,17 +19,17 @@ public class Test {
             arr[minIndex] = temp;
         }
     }
+    
     // Пример использования
     public static void main(String[] args) {
-        // Создаем тестовый массив
         int[] testArray = {23, 56, 21, 41, 12};
         System.out.print("Исходный массив: ");
         printArray(testArray);
-        // Сортируем массив
         selectionSort(testArray);
         System.out.print("Отсортированный массив: ");
         printArray(testArray);
     }
+    
     // Вспомогательный метод для вывода массива
     public static void printArray(int[] arr) {
         System.out.print("[");
@@ -41,12 +42,9 @@ public class Test {
         System.out.println("]");
     }
 }
-
-
-//===========================================
-//Сортировка обменом (пузырьком) (Bubble Sort) 
-
-public class Test {
+2. Сортировка пузырьком (Bubble Sort)
+java
+public class BubbleSort {
     public static void bubbleSort(int[] arr) {
         int n = arr.length;
         for (int i = 0; i < n - 1; i++) {
@@ -79,11 +77,44 @@ public class Test {
         System.out.println("]");
     }
 }
-
-//========================================
-
-//Сортировка слиянием (Merge Sort) 
-public class Test {
+3. Сортировка вставками (Insertion Sort)
+java
+public class InsertionSort {
+    public static void insertionSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int key = arr[i];
+            int j = i - 1;
+            
+            // Сдвигаем элементы, которые больше key
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+    
+    public static void main(String[] args) {
+        int[] testArray = {15, 8, 42, 4, 23, 16};
+        System.out.print("Исходный массив: ");
+        printArray(testArray);
+        insertionSort(testArray);
+        System.out.print("Отсортированный массив: ");
+        printArray(testArray);
+    }
+    
+    public static void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+    }
+}
+4. Сортировка слиянием (Merge Sort)
+java
+public class MergeSort {
     public static void mergeSort(int[] arr) {
         if (arr.length < 2) return;
 
@@ -132,11 +163,9 @@ public class Test {
         System.out.println("]");
     }
 }
-
-//=====================================
-//Сортировка Шелла (Shell Sort)
-
-public class Test {
+5. Сортировка Шелла (Shell Sort)
+java
+public class ShellSort {
     public static void shellSort(int[] arr) {
         int n = arr.length;
 
@@ -170,10 +199,62 @@ public class Test {
         System.out.println("]");
     }
 }
-//========================================
-//Пирамидальная сортировка (Heap Sort)
-
-public class Test {
+6. Быстрая сортировка (Quick Sort)
+java
+public class QuickSort {
+    public static void quickSort(int[] arr) {
+        quickSort(arr, 0, arr.length - 1);
+    }
+    
+    private static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+    
+    private static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return i + 1;
+    }
+    
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    
+    public static void main(String[] args) {
+        int[] testArray = {24, 15, 38, 2, 19, 41, 8};
+        System.out.print("Исходный массив: ");
+        printArray(testArray);
+        quickSort(testArray);
+        System.out.print("Отсортированный массив: ");
+        printArray(testArray);
+    }
+    
+    public static void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+    }
+}
+7. Пирамидальная сортировка (Heap Sort)
+java
+public class HeapSort {
     public static void heapSort(int[] arr) {
         int n = arr.length;
 
@@ -227,10 +308,10 @@ public class Test {
         System.out.println("]");
     }
 }
-
-//======================================
-//Последовательный поиск (Linear Search) 
-public class Test {
+Алгоритмы поиска
+1. Последовательный поиск (Linear Search)
+java
+public class LinearSearch {
     public static int linearSearch(int[] arr, int target) {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == target) {
@@ -258,10 +339,58 @@ public class Test {
         System.out.println("]");
     }
 }
-//======================================
-//Интерполирующий поиск (Interpolation Search)
-
-public class Test {
+2. Бинарный поиск (Binary Search)
+java
+public class BinarySearch {
+    public static int binarySearch(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if (arr[mid] == target) {
+                return mid;
+            }
+            if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+    
+    public static void main(String[] args) {
+        int[] testArray = {3, 7, 14, 21, 29, 33, 42, 55, 67, 78};
+        int[] targets = {29, 7, 100, 42};
+        
+        System.out.print("Массив: ");
+        printArray(testArray);
+        System.out.println();
+        
+        for (int target : targets) {
+            int result = binarySearch(testArray, target);
+            if (result != -1) {
+                System.out.println("Элемент " + target + " найден на позиции: " + result);
+            } else {
+                System.out.println("Элемент " + target + " не найден");
+            }
+        }
+    }
+    
+    public static void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+    }
+}
+3. Интерполяционный поиск (Interpolation Search)
+java
+public class InterpolationSearch {
     public static int interpolationSearch(int[] arr, int target) {
         int low = 0;
         int high = arr.length - 1;
@@ -299,10 +428,9 @@ public class Test {
         System.out.println("]");
     }
 }
-
-//======================================
-//Поиск Фибоначчи (Fibonacci Search) 
-public class Test {
+4. Поиск Фибоначчи (Fibonacci Search)
+java
+public class FibonacciSearch {
     public static int fibonacciSearch(int[] arr, int target) {
         int fibMMm2 = 0; // (m-2)-е число Фибоначчи
         int fibMMm1 = 1; // (m-1)-е число Фибоначчи
@@ -348,6 +476,39 @@ public class Test {
         System.out.println("Элемент " + target + " найден на позиции: " + result);
     }
 
+    public static void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+    }
+}
+Тестирование всех алгоритмов
+java
+public class AlgorithmTester {
+    public static void main(String[] args) {
+        System.out.println("ТЕСТИРОВАНИЕ АЛГОРИТМОВ СОРТИРОВКИ И ПОИСКА");
+        System.out.println("============================================");
+        
+        // Тестирование сортировки выбором
+        int[] arr1 = {23, 56, 21, 41, 12};
+        System.out.print("Сортировка выбором - Исходный: ");
+        printArray(arr1);
+        SelectionSort.selectionSort(arr1);
+        System.out.print("Сортировка выбором - Результат: ");
+        printArray(arr1);
+        
+        // Тестирование бинарного поиска
+        int[] arr2 = {3, 7, 14, 21, 29, 33, 42, 55, 67, 78};
+        int target = 29;
+        System.out.print("\nБинарный поиск - Массив: ");
+        printArray(arr2);
+        int result = BinarySearch.binarySearch(arr2, target);
+        System.out.println("Бинарный поиск - Элемент " + target + " найден на позиции: " + result);
+    }
+    
     public static void printArray(int[] arr) {
         System.out.print("[");
         for (int i = 0; i < arr.length; i++) {
